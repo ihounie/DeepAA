@@ -24,7 +24,9 @@ conda activate deepaa
 
 b. Install Tensorflow and PyTorch.
 ```shell
-conda install tensorflow-gpu=2.5 cudnn=8.1 cudatoolkit=11.2 -c conda-forge
+conda install cudnn=8.1 cudatoolkit=11.2 -c conda-forge
+pip3 install tensorflow-gpu==2.5
+pip3 install tensorflow==2.5
 pip3 install torch==1.9.0+cu111 torchvision==0.10.0+cu111 -f https://download.pytorch.org/whl/torch_stable.html
 ```
 
