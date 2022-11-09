@@ -22,27 +22,27 @@ _IMAGENET_PCA = {
 _CIFAR_MEAN, _CIFAR_STD = (0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)
 
 def ShearX(img, v):  # [-0.3, 0.3]
-    assert -0.3 <= v <= 0.3
+    #assert -0.3 <= v <= 0.3
     return img.transform(img.size, PIL.Image.AFFINE, (1, v, 0, 0, 1, 0))
 
 def ShearY(img, v):  # [-0.3, 0.3]
-    assert -0.3 <= v <= 0.3
+    #assert -0.3 <= v <= 0.3
     return img.transform(img.size, PIL.Image.AFFINE, (1, 0, 0, v, 1, 0))
 
 
 def TranslateX(img, v):  # [-150, 150] => percentage: [-0.45, 0.45]
-    assert -0.45 <= v <= 0.45
+    #assert -0.45 <= v <= 0.45
     v = v * img.size[0]
     return img.transform(img.size, PIL.Image.AFFINE, (1, 0, v, 0, 1, 0))
 
 def TranslateY(img, v):  # [-150, 150] => percentage: [-0.45, 0.45]
-    assert -0.45 <= v <= 0.45
+    #assert -0.45 <= v <= 0.45
     v = v * img.size[1]
     return img.transform(img.size, PIL.Image.AFFINE, (1, 0, 0, 0, 1, v))
 
 
 def Rotate(img, v):  # [-30, 30]
-    assert -30 <= v <= 30
+    #assert -30 <= v <= 30
     return img.rotate(v)
 
 
@@ -63,7 +63,7 @@ def Flip(img, _):  # not from the paper
 
 
 def Solarize(img, v):  # [0, 256]
-    assert 0 <= v <= 256
+    #assert 0 <= v <= 256
     return PIL.ImageOps.solarize(img, v)
 
 
@@ -77,28 +77,28 @@ def SolarizeAdd(img, addition=0, threshold=128):
 
 
 def Posterize(img, v):  # [4, 8]
-    assert 4 <= v <= 8 # FastAA
+    #assert 4 <= v <= 8 # FastAA
     v = int(v)
     return PIL.ImageOps.posterize(img, v)
 
 
 def Contrast(img, v):  # [0.1,1.9]
-    assert 0.1 <= v <= 1.9
+    #assert 0.1 <= v <= 1.9
     return PIL.ImageEnhance.Contrast(img).enhance(v)
 
 
 def Color(img, v):  # [0.1,1.9]
-    assert 0.1 <= v <= 1.9
+    #assert 0.1 <= v <= 1.9
     return PIL.ImageEnhance.Color(img).enhance(v)
 
 
 def Brightness(img, v):  # [0.1,1.9]
-    assert 0.1 <= v <= 1.9
+    #assert 0.1 <= v <= 1.9
     return PIL.ImageEnhance.Brightness(img).enhance(v)
 
 
 def Sharpness(img, v):  # [0.1,1.9]
-    assert 0.1 <= v <= 1.9
+    #assert 0.1 <= v <= 1.9
     return PIL.ImageEnhance.Sharpness(img).enhance(v)
 
 
@@ -158,7 +158,7 @@ def RandFlip(img, _):
 
 def mean_pad_randcrop(img, v):
     # v: Pad with mean value=[125, 123, 114] by v pixels on each side and then take random crop
-    assert v <= 10, 'The maximum shift should be less then 10'
+    #assert v <= 10, 'The maximum shift should be less then 10'
     padded_size = (img.size[0] + 2*v, img.size[1] + 2*v)
     new_img = PIL.Image.new('RGB', padded_size, color=(125, 123, 114))
     new_img.paste(img, (v, v))

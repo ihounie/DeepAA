@@ -35,20 +35,20 @@ from imagenet_data_utils import get_imagenet_split
 def aug_op_cifar_list():  # oeprators and their ranges
     l = [
         (Identity, 0., 1.0), # 0
-        (ShearX, -0.3, 0.3),  # 1
-        (ShearY, -0.3, 0.3),  # 2
-        (TranslateX, -0.45, 0.45),  # 3
-        (TranslateY, -0.45, 0.45),  # 4
-        (Rotate, -30., 30.),  # 5
+        (ShearX, -0.99, 0.99),  # 1
+        (ShearY, -0.99, 0.99),  # 2
+        (TranslateX, -1.0, 1.0),  # 3
+        (TranslateY, -1.0, 1.0),  # 4
+        (Rotate, -135., 135.),  # 5
         (AutoContrast, 0., 1.),  # 6
         (Invert, 0., 1.),  # 7
         (Equalize, 0., 1.),  # 8
         (Solarize, 0., 256.),  # 9
-        (Posterize, 4., 8.),  # 10,
-        (Contrast, 0.1, 1.9),  # 11
-        (Color, 0.1, 1.9),  # 12
-        (Brightness, 0.1, 1.9),  # 13
-        (Sharpness, 0.1, 1.9),  # 14
+        (Posterize, 2., 8.),  # 10,
+        (Contrast, 0.01, 2.0),  # 11
+        (Color, 0.01, 2.0),  # 12
+        (Brightness, 0.01, 2.0),  # 13
+        (Sharpness, 0.01, 2.0),  # 14
         (RandFlip, 0., 1.0), # 15
         (RandCutout, 0., 1.0), # 16
         (RandCrop, 0., 1.0), # 17

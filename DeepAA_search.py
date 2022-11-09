@@ -4,6 +4,7 @@ import os
 import sys
 import numpy as np
 import tensorflow as tf
+from time import time
 tf.config.threading.set_inter_op_parallelism_threads(0)
 gpus = tf.config.list_physical_devices('GPU')
 for gpu in gpus:
@@ -575,8 +576,10 @@ def search_policy(search_bno, search_bs=16, val_bs=128):
 
 
 if __name__ == '__main__':
+    initial_time = time()
     search_policy(search_bno=args.search_bno, search_bs=args.train_same_labels, val_bs=64)
+    search_time = time()-initial_time
+    print(f"Search took {search_time} seconds")
     save_policy(args, all_using_policies, augmentation_search)
-
     pool.close()
     pool.join()

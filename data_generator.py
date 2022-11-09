@@ -134,7 +134,7 @@ class DataAugmentation(object):
         if self.ops is not None:
             for op_idx, mag in zip(op_idxs, mags):
                 op, minval, maxval = self.ops[op_idx]
-                assert mag > -1e-5 and mag < 1. + 1e-5, 'magnitudes should be in the range of (0., 1.)'
+                #assert mag > -1e-5 and mag < 1. + 1e-5, 'magnitudes should be in the range of (0., 1.)'
                 mag = mag * (maxval - minval) + minval
                 pil_img = op(pil_img, mag)
         if self.default_post_aug is not None and self.use_post_aug:
