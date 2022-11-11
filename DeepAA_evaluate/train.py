@@ -265,12 +265,13 @@ def train_and_eval(rank, worldsize, tag, dataroot, test_ratio=0.0, cv_fold=0, re
     for epoch in range(epoch_start, max_epoch + 1):
         if worldsize > 1:
             trainsampler.set_epoch(epoch)
-
+        t = time()
         model.train()
         rs = dict()
         rs['train'] = run_epoch(rank, worldsize,model, trainloader, criterion, optimizer, desc_default='train', epoch=epoch, writer=writers[0], verbose=True, scheduler=scheduler, sample_pairing_loader=testtrainloader_)
         model.eval()
-
+        elapsed = (time()-t)
+        #print('time ', elapsed)
         if math.isnan(rs['train']['loss']):
             raise Exception('train loss is NaN.')
 
@@ -421,6 +422,10 @@ def spawn_process(global_rank, worldsize, port_suffix, args, config_path=None, c
     logger.info('elapsed time: %.3f Hours' % (elapsed / 3600.))
     logger.info('top1 error in testset: %.4f' % (1. - result['top1_test']))
     logger.info(args.save)
+        # Append-adds at last
+    file1 = open(f"{C.get()['model']}_{C.get()['dataset']}.txt", "a")  # append mode
+    file1.write(f"{result['top1_test']} \n")
+    file1.close()
     if worldsize:
         cleanup()
 
