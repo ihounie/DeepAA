@@ -176,7 +176,10 @@ class DataAugmentation(object):
         if 'imagenet' in self.dataset:
             assert type(labels[0]) == np.int32
         elif 'cifar' in self.dataset:
-            assert type(labels[0]) == np.uint8
+            if "100" in self.dataset:
+                assert type(labels[0]) == np.int64
+            else:
+                assert type(labels[0]) == np.uint8
         else:
             raise Exception('Unrecognized dataset')
 
